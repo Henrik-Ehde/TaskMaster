@@ -1,42 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TaskMaster
+﻿namespace TaskMaster
 {
-    internal class TaskList
+    static internal class TaskList
     {
         //A list that contains tasks. Also has methods to display the list.
-        public TaskList(List<Task> tasks)
-        {
-            this.tasks = tasks;
-        }
+        //public TaskList(List<Task> tasks)
+        //{
+        //    this.tasks = tasks;
+        //}
 
-        public List<Task> tasks {  get; set; }
+        public static List<Task> tasks {  get; set; }
 
-        public void Add(Task task)
+        static public void Add(Task task)
         {
             tasks.Add(task);
         }
 
-        public void DisplayByDate()
+        static public void DisplayByDate()
         {
             //Sorts the list by date and displays it
             List<Task> sortedList = tasks.OrderBy(t => t.DueDate).ToList();
             Display(sortedList);
         }
 
-        public void DisplayByProject()
+        static public void DisplayByProject()
         {
             //Sorts the list by project,then by date and displays it
             List<Task> sortedList = tasks.OrderBy(t => t.Project).ThenBy(t => t.DueDate).ToList();
             Display(sortedList);
         }
 
-        void Display(List<Task> displayList)
+        static void Display(List<Task> displayList)
         {
             //Displays the list after it has been sorted by one of the public display methods
             ColoredText.WriteLine("\n"+"TITLE:".PadRight(16) + "PROJECT:".PadRight(16) + "DUE DATE:".PadRight(16) + "STATUS:",
@@ -62,6 +55,11 @@ namespace TaskMaster
                 Console.ResetColor();
             }
             Console.WriteLine("");
+        }
+
+        static public void DisplayForMenu()
+        {
+
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace TaskMaster
+﻿namespace TaskMaster
 {
     internal class Task
     {
@@ -31,7 +26,6 @@ namespace TaskMaster
             Completed = completed;
         }
 
-
         //Constructor that recieves a Datetime.
         public Task(string title, string project, DateTime dueDate, bool completed)
         {
@@ -43,7 +37,7 @@ namespace TaskMaster
 
 
         //Let's the user create a new task by entering information.
-        public static Task CreateTask()
+        public static void CreateTask()
         {
             string titleInput;
             ColoredText.WriteLine("Enter a title for your task", ConsoleColor.Yellow);
@@ -77,7 +71,8 @@ namespace TaskMaster
                 }
             }
 
-            return new Task(titleInput, projectInput, date,  false);
+            TaskList.Add(new Task(titleInput, projectInput, date, false));
+            ColoredText.WriteLine("The task has been added\n", ConsoleColor.Green);
 
 
 

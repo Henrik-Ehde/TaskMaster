@@ -1,56 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TaskMaster
+﻿namespace TaskMaster
 {
-    //static internal class Menus { }
-    class Menu
+    static internal class Menus
     {
-        string HeaderText { get; set; }
-        List<Option> Options = new List<Option>();
-
-        public Menu(string headerText, List<Option> options)
+        //Sets up and contains all the menus in the program. Also contains some simple functions such as exiting the application.
+        static public Menu MainMenu, DisplayMenu, TaskMenu;
+        static public void Setup()
         {
-            HeaderText = headerText;
-            Options = options;
+            DisplayMenu = new Menu("Display To-Do List",
+            [
+                new Option("Sorted by Date", TaskList.DisplayByDate),
+                new Option("Sorted by Project", TaskList.DisplayByProject),
+                new Option("Cancel", Cancel)
+            ]);
+
+            TaskMenu = new Menu("What would you like to do?",
+            [
+                new Option("Mark as Completed", TaskEditor.MarkAsComplete),
+                new Option("Mark as NOT Completed", TaskEditor.MarkAsIncomplete),
+                new Option("Delete", TaskEditor.Delete),
+                new Option("Cancel", Cancel)
+            ]);
+
+            MainMenu = new Menu("What would you like to do?",
+            [
+                new Option("Show To-Do List", DisplayMenu.Open),
+                new Option("Add Task", Task.CreateTask),
+                new Option("Edit Task", TaskEditor.Edit),
+                new Option("Exit", Exit)
+            ]);
         }
 
-        public void Open()
+        static void Cancel()
         {
-            ColoredText.WriteLine(HeaderText, ConsoleColor.Yellow);
-            for (int i = 0; i < Options.Count; i++)
-            {
-                Console.WriteLine(i+1 + ") " + Options[i].Text);
-            }
-
-            int selection;
-            while (true)
-            {
-                char inputKey = Console.ReadKey(true).KeyChar;
-                if (int.TryParse(inputKey.ToString(), out selection) && selection <= Options.Count) break;
-            }
-
-            Console.WriteLine("");
-            Options[selection-1].Function();
-
-        }
-    }
-
-    class Option
-    {
-        public Option(string text, functionCall function)
-        {
-            Text = text;
-            Function = function;
+            //Do nothing - let the program return to main menu
         }
 
-        public string Text { get; set; }
-        public delegate void functionCall();
-        public functionCall Function;
-            
+        static void Exit()
+        {
+            Environment.Exit(0);
+        }
     }
 }
