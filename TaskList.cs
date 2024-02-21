@@ -3,10 +3,6 @@
     static internal class TaskList
     {
         //A list that contains tasks. Also has methods to display the list.
-        //public TaskList(List<Task> tasks)
-        //{
-        //    this.tasks = tasks;
-        //}
 
         public static List<Task> tasks {  get; set; }
 
@@ -32,7 +28,7 @@
         static void Display(List<Task> displayList)
         {
             //Displays the list after it has been sorted by one of the public display methods
-            ColoredText.WriteLine("\n"+"TITLE:".PadRight(16) + "PROJECT:".PadRight(16) + "DUE DATE:".PadRight(16) + "STATUS:",
+            ColoredText.WriteLine("TITLE:".PadRight(24) + "PROJECT:".PadRight(16) + "DUE DATE:".PadRight(16) + "STATUS:",
                                         ConsoleColor.DarkBlue);
 
             foreach (Task t in displayList)
@@ -51,15 +47,10 @@
                 }
                 else statusString = "";
                 
-                Console.WriteLine(t.Title.PadRight(16) + t.Project.PadRight(16) + t.DueDate.ToString("d").PadRight(16) + statusString);
+                Console.WriteLine(t.Title.PadRight(24) + t.Project.PadRight(16) + t.DueDate.ToString("d").PadRight(16) + statusString);
                 Console.ResetColor();
             }
             Console.WriteLine("");
-        }
-
-        static public void DisplayForMenu()
-        {
-
         }
     }
 }

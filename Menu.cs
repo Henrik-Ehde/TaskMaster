@@ -5,7 +5,7 @@
         //Contains information about a single menu: Instructions to be displayed and a list of options to chose from.
         //Has a function to display the options and let user select one of them.
         string HeaderText { get; set; }
-        List<Option> Options = new List<Option>();
+        public List<Option> Options = new List<Option>();
 
         public Menu(string headerText, List<Option> options)
         {
@@ -26,11 +26,11 @@
             int selection;
             while (true)
             {
-                char inputKey = Console.ReadKey(true).KeyChar;
+                char inputKey = Console.ReadKey(false).KeyChar;
                 if (int.TryParse(inputKey.ToString(), out selection) && selection <= Options.Count) break;
             }
 
-            Console.WriteLine("");
+            Console.Write("\n\n");
             //Calls the function to execute the selected option
             Options[selection-1].Function();
 

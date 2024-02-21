@@ -8,6 +8,8 @@
         public DateTime DueDate { get; set; }
         public bool Completed { get; set; }
 
+        public Task() { }
+
 
         public Task(string title, string project, string dueDate,  bool completed)
         {
@@ -39,8 +41,26 @@
         //Let's the user create a new task by entering information.
         public static void CreateTask()
         {
-            string titleInput;
             ColoredText.WriteLine("Enter a title for your task", ConsoleColor.Yellow);
+            string titleInput = InputTitle();
+
+            ColoredText.WriteLine("Is the task part of a project? If it is not, leave empty and press enter to continue", ConsoleColor.Yellow);
+            Console.Write("Project: ");
+            string projectInput = Console.ReadLine();
+
+            ColoredText.WriteLine("Enter a due date for your task", ConsoleColor.Yellow);
+            DateTime date = InputDate();
+
+            TaskList.Add(new Task(titleInput, projectInput, date, false));
+            ColoredText.WriteLine("The task has been added\n", ConsoleColor.Green);
+        }
+
+
+
+        public static string InputTitle()
+        {
+            //Lets the user input a name. Loops if an empty string is entered.
+            string titleInput;
             while (true)
             {
                 Console.Write("Title: ");
@@ -49,13 +69,13 @@
                 else break;
             }
 
+            return titleInput;
+        }
 
-            ColoredText.WriteLine("Is the task part of a project? If it is not, leave empty and press enter to continue", ConsoleColor.Yellow);
-            Console.Write("Project: ");
-            string projectInput = Console.ReadLine();
-
+        public static DateTime InputDate()
+        {
+            //Lets the user input a date. Loops until a valid date is entered.
             DateTime date;
-            ColoredText.WriteLine("Enter a due date for your task", ConsoleColor.Yellow);
             while (true)
             {
                 try
@@ -71,13 +91,8 @@
                 }
             }
 
-            TaskList.Add(new Task(titleInput, projectInput, date, false));
-            ColoredText.WriteLine("The task has been added\n", ConsoleColor.Green);
-
-
-
+            return date;
         }
-
     }
 
 

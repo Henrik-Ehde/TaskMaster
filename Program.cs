@@ -3,21 +3,15 @@ using Task = TaskMaster.Task;
 
 
 
-//Create a populated list of tasks
-TaskList.tasks =
-[
-    new Task("Do dishes", "Chores", "20/2", false),
-    new Task("Take out trash", "Chores", "22/2", true),
-    new Task("Read a book", "", "25/3", false)
-];
 
+
+FileHandler.Open();
 Menus.Setup();
+
 while (true)
 {
     Menus.MainMenu.Open();
 }
-
-Console.ReadLine();
 
 
 
